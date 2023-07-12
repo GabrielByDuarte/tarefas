@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tarefas</title>
+    <script src="https://kit.fontawesome.com/40cc08f0c1.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+
+
+<body>
+    <h1>Lista de Tarefas</h1>
+
+    <% resultado.forEach(tarefa=> { %>
+        <div class="box-tarefa" id="tabela-tarefas">
+            <div class="<%= tarefa.id %>">
+
+                <div>
+                    <div class="tarefa <%= tarefa.id %>" id="tarefa<%= tarefa.id %>"><%= tarefa.titulo %><i class="fa-solid fa-info <%= tarefa.id %>"></i></div>
+                    <div>
+                        <div>
+                            <i class="fa-square-check fa-solid i<%= tarefa.conclusao %>" id="i<%= tarefa.id %>"></i>
+                        </div>
+                        <div>
+                            <i class="fa-solid fa-pencil" id="e<%= tarefa.id %>"></i>
+                        </div>
+                        <div>
+                            <i class="fa-solid fa-trash" id="<%= tarefa.id %>"></i>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="descricao <%= tarefa.id %>" id="descricao<%= tarefa.id %>"style="display: none;"><%= tarefa.descricao %></div>
+            </div>
+        </div>
+
+        <% }); %>
+
+
+            <form action="/tarefas/adicionar" method="POST" id="criar">
+                <input type="text" name="title" placeholder="Criar Tarefa" required>
+                <input type="text" name="description" placeholder="Descrição" required>
+                <button type="submit">Adicionar Tarefa</button>
+            </form>
+            <form action="/tarefas/editar" method="POST" id="editar" style="display:none">
+
+                <input type="number" name="id" placeholder="ID" id="input-id" value="" hidden>
+                <input type="text" name="title" placeholder="Editar/Nova Tarefa" id="new-title" value="" required>
+                <input type="text" name="description" placeholder="Editar/Nova Descrição" id="new-description" value=""
+                    required>
+                <button type="submit">Editar Tarefa</button>
+            </form>
+            <style>
+                .fa-info {
+                    cursor: pointer;
+                    font-size: 13px !important;
+                    background: #c0c0c082;
+                    border-radius: 100px;
+                    padding: 6px 11px;
+                    border: solid 1px #4d4d4d;
+                    color: #4d4d4d;
+                    font-weight: bold;
+                }
+
+                body {
+
+
+                    font-family: "Popins", sans-serif;
+
+
+
+                }
+
+
+
+
+                .box-tarefa {
+                    background: #f9f9f9;
+                    width: 100%;
+                    filter: drop-shadow(0px 0px 2px silver);
+                    display: flex;
+                    padding: 5px;
+                    border-radius: 10px;
+                    flex-direction: row;
+                    margin: 0 0 10px 0;
+                }
+
+                .tarefa {
+                    font-family: sans-serif;
+                    font-size: 16px;
+                }
+
+                .box-tarefa>div>div>div {
+                    gap: 15px;
+                    display: flex;
+                    align-items: center;
+
+                }
+
+                .box-tarefa>div>div {
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 0 10px;
+
+                }
+
+                .box-tarefa>div {
+                    width: 100%;
+                }
+
+                body {
+                    width: 100%;
+                    max-width: 500px;
+                    margin: 0 auto;
+                    padding: 10px;
+                    background: white;
+                    filter: drop-shadow(2px 4px 6px black);
+                    border-radius: 10px;
+                }
+
+                html {
+                    background-image: linear-gradient(120deg, #dbbe5d, #fda085);
+                    width: 100%;
+                    padding: 0 10px;
+                    height: 100vh;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+
+
+                * {
+                    box-sizing: border-box;
+                }
+
+                form>input {
+                    border-radius: 5px;
+                    width: 90%;
+                    padding: 7px;
+                    font-size: 15px;
+                    border: solid 1px silver;
+                }
+
+
+
+                @media (min-width:767px) {
+                    .descricao {
+                        width: 50%;
+                    }
+
+                }
+
+                @media (max-width:767px) {
+                    .descricao {
+                        width: 40%;
+                    }
+
+                }
+
+                .descricao {
+                    font-family: sans-serif;
+                    font-size: 16px;
+                    background: #c0c0c082;
+                    display: flex;
+
+                    position: absolute;
+                    right: 0px;
+                    border-radius: 7px;
+                    height: 41px;
+                    color: black;
+                    z-index: 21341;
+                    transform: translate(-36%, -85%);
+                    justify-content: center;
+                    align-items: center;
+                    overflow: scroll;
+                }
+
+                .fa-trash,
+                .fa-pencil,
+                .fa-square-check.i1 {
+                    color: #d88771;
+                    cursor: pointer;
+                }
+
+                .fa-square-check.i2 {
+                    color: #d887719a;
+                    cursor: pointer;
+                }
+
+                form>button {
+                    font-size: 15px;
+                    padding: 12px;
+                    cursor: pointer;
+                    background: #d88771;
+                    color: white;
+                    border-radius: 6px;
+                    border: solid 0px silver;
+                }
+
+                .fa-solid,
+                .fas {
+                    font-size: 24px;
+
+                }
+
+                form {
+                    margin: 25px 0 0 0;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                    align-items: flex-start;
+                }
+
+                h1 {
+                    text-align: center;
+                }
+            </style>
+            <script>
+
+
+                $(".fa-trash").click(function () {
+                    var id = $(this).attr('id');
+                    window.location.href = '/tarefas/excluir?id=' + id;
+                });
+                $(".fa-square-check").click(function () {
+                    var id = $(this).attr('id');
+                    var check = $(this).attr('class').split(' ')[2];
+                    window.location.href = '/tarefas/concluir?id=' + id + '&check=' + check;
+                });
+                $(".fa-pencil").click(function () {
+                    var id = $(this).attr('id');
+                    newId = id.replace("e", "");
+
+                    // window.location.href = '/tarefas/editar?id=' + newId;
+                    if (document.getElementById("editar").style.display === "none") {
+                        // Se estiver oculta, mostra a div
+                        document.getElementById("editar").style.display = "flex";
+                        document.getElementById("criar").style.display = "none";
+                        document.getElementById("input-id").value = newId;
+                        descricaoId = document.getElementById('descricao' + newId);
+                        console.log(descricaoId);
+                        tarefaId = document.getElementById('tarefa' + newId);
+                        console.log(tarefaId);
+                        document.getElementById("new-title").value = tarefaId.textContent;
+                        document.getElementById("new-description").value = tarefaId.textContent;
+
+
+                    } else {
+                        // Se estiver visível, oculta a div
+                        document.getElementById("editar").style.display = "none";
+                        document.getElementById("criar").style.display = "flex";
+                    }
+                });
+
+                const urlParams = new URLSearchParams(window.location.search);
+                const editar = urlParams.get('editar');
+                const id = urlParams.get('id');
+                if (editar == "true") {
+                    console.log(id);
+                    document.getElementById("editar").style.display = "flex";
+                    document.getElementById("criar").style.display = "none";
+                    document.getElementById("input-id").value = id;
+                }
+
+                // Seleciona todos os elementos com a classe "fa-info"
+                const faInfoElements = document.querySelectorAll('.fa-info');
+
+                // Adiciona um evento de clique a cada elemento
+                faInfoElements.forEach(element => {
+                    element.addEventListener('click', () => {
+                        // Obtém a terceira classe do elemento "fa-info"
+                        const thirdClass = element.classList[2];
+
+                        // Seleciona todos os elementos com a classe "descricao"
+                        const descricaoElements = document.querySelectorAll('.descricao');
+
+                        // Verifica se há correspondências com a terceira classe
+                        descricaoElements.forEach(descricao => {
+                            if (descricao.classList.contains(thirdClass)) {
+                                // Aplica o estilo "display: flex" ao elemento "descricao"
+
+                                if (descricao.style.display == "flex") {
+                                    descricao.style.display = 'none';
+                                    descricao.style.opacity = '0';
+                                }
+                                else {
+                                    descricao.style.display = 'flex';
+                                    descricao.style.opacity = '1';
+                                }
+
+
+                            }
+                        });
+                    });
+                }); 
+            </script>
+</body>
+
+</html>
