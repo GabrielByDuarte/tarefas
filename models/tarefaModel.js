@@ -4,7 +4,8 @@ exports.mostrarTarefas = async (res, req) => {
 
     try {
         banco = require("./conexao");
-        return await banco.query("SELECT * FROM `tarefa`");
+        selecionando = await banco.query("SELECT * FROM `tarefa`");
+        return await selecionando;
 
     } catch (error) {
         console.error('Erro ao registrar usuario', error);
@@ -14,7 +15,8 @@ exports.mostrarTarefas = async (res, req) => {
 exports.adicionarTarefa = async (title, description) => {
     try {
         banco = require("./conexao");
-        return await banco.query("INSERT INTO `tarefa` (`id`,`titulo`,`descricao`,`conclusao`) VALUES (NULL,'" + title + "','" + description + "','2')");
+        adiconando = await banco.query("INSERT INTO `tarefa` (`id`,`titulo`,`descricao`,`conclusao`) VALUES (NULL,'" + title + "','" + description + "','2')");
+        return await adiconando;
     } catch (error) {
         console.error('Erro ao registrar usuario', error);
     }
@@ -23,7 +25,8 @@ exports.adicionarTarefa = async (title, description) => {
 exports.editarTarefa = async (id, title, description) => {
     try {
         banco = require("./conexao");
-        return await banco.query("UPDATE `tarefa` SET `titulo` = '" + title + "', `descricao`='" + description + "' WHERE `tarefa`.`id` = " + id);
+        editando = await banco.query("UPDATE `tarefa` SET `titulo` = '" + title + "', `descricao`='" + description + "' WHERE `tarefa`.`id` = " + id);
+        return await editando;
     } catch (error) {
         console.error('Erro ao registrar usuario', error);
     }
@@ -44,8 +47,9 @@ exports.excluir = async (id) => {
 exports.concluir = async (id, check) => {
     if (check == 1) {
         try {
-            banco = await require("./conexao");
-            return await banco.query("UPDATE `tarefa` SET `conclusao` = '2' WHERE `tarefa`.`id` =" + id);
+            banco = require("./conexao");
+            concluindo = await banco.query("UPDATE `tarefa` SET `conclusao` = '2' WHERE `tarefa`.`id` =" + id);
+            return await concluindo;
         } catch (error) {
             console.error('Erro ao registrar usuario', error);
         }
@@ -54,7 +58,8 @@ exports.concluir = async (id, check) => {
     else {
         try {
             banco = require("./conexao");
-            return await banco.query("UPDATE `tarefa` SET `conclusao` = '1' WHERE `tarefa`.`id` =" + id);
+            concluindo = await banco.query("UPDATE `tarefa` SET `conclusao` = '1' WHERE `tarefa`.`id` =" + id);
+            return await concluindo;
         } catch (error) {
             console.error('Erro ao registrar usuario', error);
         }
