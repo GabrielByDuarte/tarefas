@@ -3,7 +3,7 @@ conexao = require('../models/conexao');
 
 exports.getTarefas = async (req, res) => {
     try {
-        resultado = tarefa.mostrarTarefas();
+        resultado = await tarefa.mostrarTarefas();
 
         setTimeout(function () {
             return res.render('tarefas.ejs', { resultado });
